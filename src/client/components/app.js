@@ -3,7 +3,11 @@ import React from "react";
 import Workout from "./workout";
 
 function App() {
-  return <Workout />;
+  return (
+    <React.Fragment>
+      <Workout />
+    </React.Fragment>
+  );
 }
 
 export default App;

@@ -3,17 +3,22 @@ import PropTypes from "prop-types";
 import { Modal, Card, TextField, Button } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import compose from "lodash.compose";
-
-import useLocalStorageSetState from "../hooks/use-local-storage-set-state";
+import useState from "use-local-storage-set-state";
+import shortid from "shortid";
 
 function AddExercise(props) {
-  const [isModalOpen, setModalStatus] = useLocalStorageSetState(
-    false,
-    "add-exercise-modal"
-  );
+  const [isModalOpen, setModalStatus] = useState(false, "add-exercise-modal");
   const onSubmit = e => {
     e.preventDefault();
     setModalStatus(false);
+    const { title, goalReps, weight } = e.target.elements;
+
+    props.addExercise({
+      title: title.value,
+      goalReps: goalReps.value,
+      weight: weight.value,
+      id: shortid.generate()
+    });
   };
   return (
     <div>
@@ -21,7 +26,6 @@ function AddExercise(props) {
         variant="contained"
         color="primary"
         onClick={() => {
-          // props.addExercise;
           setModalStatus(state => {
             return !state;
           });
@@ -32,7 +36,8 @@ function AddExercise(props) {
       <Modal open={isModalOpen} className={props.classes.modal}>
         <Card className={props.classes.modalCard}>
           <form className={props.classes.formContent} onSubmit={onSubmit}>
-            <TextField variant="outlined" label="Exercise name" name="name" />
+            <TextField variant="outlined" label="Exercise name" name="title" />
+            <TextField variant="outlined" label="Weight" name="weight" />
             <TextField variant="outlined" label="Reps" name="goalReps" />
             <Button type="submit" variant="contained" color="primary">
               Submit
