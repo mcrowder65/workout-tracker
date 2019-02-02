@@ -2,22 +2,21 @@ import React from "react";
 import compose from "lodash.compose";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
+import { Grid } from "@material-ui/core";
 
 import BottomNavigation from "./bottom-navigation";
 import Workout from "./workout";
 
 function App({ classes }) {
   return (
-    <React.Fragment>
-      <div>
-        <div className={classes.centered}>
-          <Workout />
-        </div>
-        <footer>
-          <BottomNavigation />
-        </footer>
+    <div className={classes.body}>
+      <div className={classes.centered}>
+        <Workout />
       </div>
-    </React.Fragment>
+      <div className={classes.footer}>
+        <BottomNavigation />
+      </div>
+    </div>
   );
 }
 
@@ -26,10 +25,20 @@ App.propTypes = {
 };
 
 const styles = {
-  body: {},
+  footer: {
+    position: "fixed",
+    width: "100%",
+    bottom: 0,
+  },
+  body: {
+    height: "100%",
+    width: "100%",
+  },
   centered: {
+    height: "100%",
     display: "flex",
     justifyContent: "center",
+    alignItems: "center",
   },
 };
 

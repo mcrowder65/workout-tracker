@@ -14,7 +14,7 @@ import compose from "lodash.compose";
 
 function BottomNavigation(props) {
   return (
-    <MuiBottomNavigation>
+    <MuiBottomNavigation color="primary">
       <BottomNavigationAction label="Recents" icon={<Restore />} />
       <BottomNavigationAction label="Favorites" icon={<Favorite />} />
       <BottomNavigationAction label="Nearby" icon={<LocationOn />} />
