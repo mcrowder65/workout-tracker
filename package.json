@@ -1,5 +1,5 @@
 {
-  "name": "hooks-poc",
+  "name": "workout-tracker",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -17,7 +17,22 @@
     "build": "react-scripts build",
     "linter": "eslint src --ext .js",
     "test": "npm run linter && react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "bundlesize": "bundlesize",
+    "analyze": "source-map-explorer build/static/js/main.*",
+    "analyze-npm": "source-map-explorer build/static/js/1.*",
+    "prettier": "prettier --write \"src/**/*.js\""
+  },
+  "bundlesize": [
+    {
+      "path": "build/static/js/*.js",
+      "maxSize": "90 kB"
+    }
+  ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run prettier"
+    }
   },
   "eslintConfig": {
     "extends": [
@@ -31,8 +46,11 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "bundlesize": "0.17.1",
     "eslint-config-mcrowder65": "0.0.32",
-    "jest-dom": "^3.0.1",
-    "react-testing-library": "5.4.4"
+    "husky": "1.3.1",
+    "jest-dom": "3.0.1",
+    "react-testing-library": "5.4.4",
+    "source-map-explorer": "1.6.0"
   }
 }
