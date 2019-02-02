@@ -2,21 +2,23 @@ import React from "react";
 import compose from "lodash.compose";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
-import { Grid } from "@material-ui/core";
 
 import BottomNavigation from "./bottom-navigation";
 import Workout from "./workout";
+import Providers from "./providers";
 
 function App({ classes }) {
   return (
-    <div className={classes.body}>
-      <div className={classes.centered}>
-        <Workout />
+    <Providers>
+      <div className={classes.body}>
+        <div className={classes.centered}>
+          <Workout />
+        </div>
+        <div className={classes.footer}>
+          <BottomNavigation />
+        </div>
       </div>
-      <div className={classes.footer}>
-        <BottomNavigation />
-      </div>
-    </div>
+    </Providers>
   );
 }
 

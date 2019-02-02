@@ -6,25 +6,44 @@ import {
 } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import Restore from "@material-ui/icons/Restore";
-
 import LocationOn from "@material-ui/icons/LocationOn";
-
 import Favorite from "@material-ui/icons/Favorite";
 import compose from "lodash.compose";
+import { useBottomNavigationSelector } from "./bottom-navigation-selector";
 
-function BottomNavigation(props) {
+function BottomNavigation({ classes }) {
+  const [bottomTab, setBottomTab] = useBottomNavigationSelector();
+
+  console.log("bottomTab", bottomTab);
   return (
-    <MuiBottomNavigation color="primary">
-      <BottomNavigationAction label="Recents" icon={<Restore />} />
+    <MuiBottomNavigation
+      value={bottomTab}
+      className={classes.root}
+      onChange={(e, value) => {
+        setBottomTab(value);
+      }}
+      showLabels
+    >
+      <BottomNavigationAction
+        label="Recents"
+        icon={<Restore />}
+        onClick={setBottomTab}
+      />
       <BottomNavigationAction label="Favorites" icon={<Favorite />} />
       <BottomNavigationAction label="Nearby" icon={<LocationOn />} />
     </MuiBottomNavigation>
   );
 }
 
-BottomNavigation.propTypes = {};
+BottomNavigation.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
 
-const styles = {};
+const styles = theme => {
+  return {
+    root: { backgroundColor: theme.palette.secondary.light },
+  };
+};
 
 const enhance = compose(withStyles(styles));
 export default enhance(BottomNavigation);
