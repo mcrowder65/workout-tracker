@@ -43,13 +43,13 @@ Exercise.propTypes = {
   title: PropTypes.string.isRequired,
   removeExercise: PropTypes.func.isRequired,
   id: PropTypes.string.isRequired,
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
 };
 
 const styles = {
   grid: {
-    padding: 5
-  }
+    padding: 5,
+  },
 };
 
 const enhance = compose(withStyles(styles));

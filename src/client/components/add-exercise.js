@@ -17,7 +17,7 @@ function AddExercise(props) {
       title: title.value,
       goalReps: goalReps.value,
       weight: weight.value,
-      id: shortid.generate()
+      id: shortid.generate(),
     });
   };
   return (
@@ -51,26 +51,26 @@ function AddExercise(props) {
 
 AddExercise.propTypes = {
   addExercise: PropTypes.func.isRequired,
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
 };
 
 const styles = {
   modal: {
     display: "flex",
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
   },
   modalCard: {
     width: "400px",
-    height: "400px"
+    height: "400px",
   },
   formContent: {
     height: "100%",
     display: "flex",
     justifyContent: "space-around",
     alignItems: "center",
-    flexDirection: "column"
-  }
+    flexDirection: "column",
+  },
 };
 
 const enhance = compose(withStyles(styles));

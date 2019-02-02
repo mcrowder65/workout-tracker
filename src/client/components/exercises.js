@@ -25,18 +25,18 @@ function Exercises({ exercises, classes, removeExercise }) {
 Exercises.propTypes = {
   exercises: PropTypes.array.isRequired,
   removeExercise: PropTypes.func.isRequired,
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
 };
 
 Exercises.defaultProps = {
-  exercises: []
+  exercises: [],
 };
 
 const styles = {
   card: {
     width: 200,
-    margin: 10
-  }
+    margin: 10,
+  },
 };
 
 const enhance = compose(withStyles(styles));

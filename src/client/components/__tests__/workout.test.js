@@ -6,5 +6,5 @@ import Workout from "../workout";
 afterEach(cleanup);
 
 test("that it renders without errors", () => {
-  render(<Workout/>);
+  render(<Workout />);
 });
