@@ -18,7 +18,7 @@ function Exercises({ classes }) {
 
 Exercises.propTypes = { classes: PropTypes.object.isRequired };
 
-const styles = theme => {
+const styles = (theme) => {
   return {
     fab: theme.fab,
   };

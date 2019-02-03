@@ -6,16 +6,16 @@ import AddExercise from "./add-exercise";
 
 function Workout() {
   const [exercises, setExercises] = useState([], "exercises");
-  const removeExercise = id => {
-    setExercises(state => state.filter(exercise => id !== exercise.id));
+  const removeExercise = (id) => {
+    setExercises((state) => state.filter((exercise) => id !== exercise.id));
   };
   console.log("exercises ", exercises);
   return (
     <div>
       <Exercises exercises={exercises} removeExercise={removeExercise} />
       <AddExercise
-        addExercise={exercise => {
-          setExercises(state => [...state, exercise]);
+        addExercise={(exercise) => {
+          setExercises((state) => [...state, exercise]);
         }}
       />
     </div>

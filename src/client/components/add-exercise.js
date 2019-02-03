@@ -8,7 +8,7 @@ import shortid from "shortid";
 
 function AddExercise(props) {
   const [isModalOpen, setModalStatus] = useState(false, "add-exercise-modal");
-  const onSubmit = e => {
+  const onSubmit = (e) => {
     e.preventDefault();
     setModalStatus(false);
     const { title, goalReps, weight } = e.target.elements;
@@ -26,7 +26,7 @@ function AddExercise(props) {
         variant="contained"
         color="primary"
         onClick={() => {
-          setModalStatus(state => {
+          setModalStatus((state) => {
             return !state;
           });
         }}

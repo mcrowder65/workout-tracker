@@ -55,7 +55,7 @@ BottomNavigation.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-const styles = theme => {
+const styles = (theme) => {
   return {
     root: { backgroundColor: theme.palette.secondary.light },
   };
