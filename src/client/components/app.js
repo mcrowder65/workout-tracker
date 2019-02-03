@@ -4,20 +4,33 @@ import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 
 import BottomNavigation from "./bottom-navigation";
-import Workout from "./workout";
 import Providers from "./providers";
+import { bottomNavigationRoutes } from "../navigation";
+import Home from "../pages/home/home";
+import Profile from "../pages/profile/profile";
+import Workouts from "../pages/workouts/workouts";
 
 function App({ classes }) {
   return (
     <Providers>
-      <div className={classes.body}>
-        <div className={classes.centered}>
-          <Workout />
-        </div>
-        <div className={classes.footer}>
-          <BottomNavigation />
-        </div>
-      </div>
+      {({ bottomTab }) => {
+        return (
+          <div className={classes.body}>
+            <div className={classes.centered}>
+              {bottomTab === bottomNavigationRoutes.home ? <Home /> : null}
+              {bottomTab === bottomNavigationRoutes.profile ? (
+                <Profile />
+              ) : null}
+              {bottomTab === bottomNavigationRoutes.workouts ? (
+                <Workouts />
+              ) : null}
+            </div>
+            <div className={classes.footer}>
+              <BottomNavigation />
+            </div>
+          </div>
+        );
+      }}
     </Providers>
   );
 }

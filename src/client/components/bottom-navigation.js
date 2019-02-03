@@ -5,16 +5,17 @@ import {
   BottomNavigationAction,
 } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
-import Restore from "@material-ui/icons/Restore";
-import LocationOn from "@material-ui/icons/LocationOn";
-import Favorite from "@material-ui/icons/Favorite";
+import FitnessCenter from "@material-ui/icons/FitnessCenter";
+import Person from "@material-ui/icons/Person";
+import Home from "@material-ui/icons/Home";
 import compose from "lodash.compose";
+
 import { useBottomNavigationSelector } from "./bottom-navigation-selector";
+import { bottomNavigationRoutes } from "../navigation";
 
 function BottomNavigation({ classes }) {
   const [bottomTab, setBottomTab] = useBottomNavigationSelector();
 
-  console.log("bottomTab", bottomTab);
   return (
     <MuiBottomNavigation
       value={bottomTab}
@@ -25,12 +26,20 @@ function BottomNavigation({ classes }) {
       showLabels
     >
       <BottomNavigationAction
-        label="Recents"
-        icon={<Restore />}
-        onClick={setBottomTab}
+        label="Home"
+        value={bottomNavigationRoutes.home}
+        icon={<Home />}
       />
-      <BottomNavigationAction label="Favorites" icon={<Favorite />} />
-      <BottomNavigationAction label="Nearby" icon={<LocationOn />} />
+      <BottomNavigationAction
+        label="Workouts"
+        value={bottomNavigationRoutes.workouts}
+        icon={<FitnessCenter />}
+      />
+      <BottomNavigationAction
+        label="Profile"
+        value={bottomNavigationRoutes.profile}
+        icon={<Person />}
+      />
     </MuiBottomNavigation>
   );
 }

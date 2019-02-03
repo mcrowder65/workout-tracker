@@ -18,13 +18,19 @@ function Providers({ children }) {
   return (
     <MuiThemeProvider theme={theme}>
       <BottomNavigationSelectorProvider>
-        {children}
+        {({ bottomTab, setBottomTab }) => {
+          return typeof children === "function"
+            ? children({ bottomTab, setBottomTab })
+            : children;
+        }}
       </BottomNavigationSelectorProvider>
     </MuiThemeProvider>
   );
 }
 
-Providers.propTypes = { children: PropTypes.node.isRequired };
+Providers.propTypes = {
+  children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+};
 
 const styles = {};
 

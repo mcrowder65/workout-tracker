@@ -10,13 +10,15 @@ function BottomNavigationSelectorProvider({ children }) {
 
   return (
     <BnsContext.Provider value={{ bottomTab, setBottomTab }}>
-      {children}
+      {typeof children === "function"
+        ? children({ bottomTab, setBottomTab })
+        : children}
     </BnsContext.Provider>
   );
 }
 
 BottomNavigationSelectorProvider.propTypes = {
-  children: PropTypes.node.isRequired,
+  children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
 };
 
 const styles = {};
