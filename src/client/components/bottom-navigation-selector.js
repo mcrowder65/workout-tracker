@@ -4,9 +4,14 @@ import compose from "lodash.compose";
 import { withStyles } from "@material-ui/core/styles";
 import useState from "use-local-storage-set-state";
 
+import { bottomNavigationRoutes } from "../navigation";
+
 const BnsContext = React.createContext();
 function BottomNavigationSelectorProvider({ children }) {
-  const [bottomTab, setBottomTab] = useState(0, "bottom-navigation-tab");
+  const [bottomTab, setBottomTab] = useState(
+    Object.values(bottomNavigationRoutes)[0].name,
+    "bottom-navigation-tab",
+  );
 
   return (
     <BnsContext.Provider value={{ bottomTab, setBottomTab }}>
@@ -18,7 +23,7 @@ function BottomNavigationSelectorProvider({ children }) {
 }
 
 BottomNavigationSelectorProvider.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+  children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
 };
 
 const styles = {};

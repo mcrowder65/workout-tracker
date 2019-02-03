@@ -13,6 +13,11 @@ const theme = createMuiTheme({
   typography: {
     useNextVariants: true,
   },
+  fab: {
+    position: "absolute",
+    bottom: 70,
+    right: 10,
+  },
 });
 function Providers({ children }) {
   return (

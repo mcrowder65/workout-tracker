@@ -5,9 +5,6 @@ import {
   BottomNavigationAction,
 } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
-import FitnessCenter from "@material-ui/icons/FitnessCenter";
-import Person from "@material-ui/icons/Person";
-import Home from "@material-ui/icons/Home";
 import compose from "lodash.compose";
 
 import { useBottomNavigationSelector } from "./bottom-navigation-selector";
@@ -27,18 +24,28 @@ function BottomNavigation({ classes }) {
     >
       <BottomNavigationAction
         label="Home"
-        value={bottomNavigationRoutes.home}
-        icon={<Home />}
+        value={bottomNavigationRoutes.home.name}
+        icon={<bottomNavigationRoutes.home.icon />}
       />
       <BottomNavigationAction
         label="Workouts"
-        value={bottomNavigationRoutes.workouts}
-        icon={<FitnessCenter />}
+        value={bottomNavigationRoutes.workouts.name}
+        icon={<bottomNavigationRoutes.workouts.icon />}
+      />
+      <BottomNavigationAction
+        label="Exercises"
+        value={bottomNavigationRoutes.exercises.name}
+        icon={<bottomNavigationRoutes.exercises.icon />}
+      />
+      <BottomNavigationAction
+        label="Progress"
+        value={bottomNavigationRoutes.progress.name}
+        icon={<bottomNavigationRoutes.progress.icon />}
       />
       <BottomNavigationAction
         label="Profile"
-        value={bottomNavigationRoutes.profile}
-        icon={<Person />}
+        value={bottomNavigationRoutes.profile.name}
+        icon={<bottomNavigationRoutes.profile.icon />}
       />
     </MuiBottomNavigation>
   );
