@@ -44,7 +44,7 @@ function Providers({ children }) {
 }
 
 Providers.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+  children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
 };
 
 const styles = {};
