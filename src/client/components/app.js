@@ -10,21 +10,22 @@ import Home from "../pages/home/home";
 import Profile from "../pages/profile/profile";
 import Workouts from "../pages/workouts/workouts";
 
+const { home, profile, workouts } = bottomNavigationRoutes;
 function App({ classes }) {
   return (
     <Providers>
       {({ bottomTab }) => {
+        let Route;
+        if (bottomTab === home) {
+          Route = Home;
+        } else if (bottomTab === profile) {
+          Route = Profile;
+        } else if (bottomTab === workouts) {
+          Route = Workouts;
+        }
         return (
           <div className={classes.body}>
-            <div className={classes.centered}>
-              {bottomTab === bottomNavigationRoutes.home ? <Home /> : null}
-              {bottomTab === bottomNavigationRoutes.profile ? (
-                <Profile />
-              ) : null}
-              {bottomTab === bottomNavigationRoutes.workouts ? (
-                <Workouts />
-              ) : null}
-            </div>
+            <div className={classes.centered}>{<Route />}</div>
             <div className={classes.footer}>
               <BottomNavigation />
             </div>
