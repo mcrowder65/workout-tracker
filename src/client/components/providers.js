@@ -1,13 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
 import compose from "lodash.compose";
+import BottomNavigationSelectorProvider from "./bottom-navigation-selector";
 import {
   createMuiTheme,
   MuiThemeProvider,
   withStyles,
 } from "@material-ui/core/styles";
-
-import BottomNavigationSelectorProvider from "./bottom-navigation-selector";
+import firebase from "@firebase/app";
 
 const theme = createMuiTheme({
   typography: {
@@ -19,6 +19,16 @@ const theme = createMuiTheme({
     right: 10,
   },
 });
+
+const config = {
+  apiKey: "AIzaSyBnAdhESRtR59Ds8AjOVBaZvVx63f3P9lI",
+  authDomain: "liftbuddyio.firebaseapp.com",
+  databaseURL: "https://liftbuddyio.firebaseio.com",
+  projectId: "liftbuddyio",
+  storageBucket: "liftbuddyio.appspot.com",
+  messagingSenderId: "521563099683",
+};
+firebase.initializeApp(config);
 function Providers({ children }) {
   return (
     <MuiThemeProvider theme={theme}>
