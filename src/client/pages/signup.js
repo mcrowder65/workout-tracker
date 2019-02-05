@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import compose from "lodash.compose";
 import { withStyles } from "@material-ui/core/styles";
 import Modal from "../reusable/modal";
-import { Grid, TextField, Button, Card, Typography } from "@material-ui/core";
+import { Grid, TextField, Typography } from "@material-ui/core";
 import useState from "use-local-storage-set-state";
 import { useFirebaseFunctions } from "../components/firebase-component";
 

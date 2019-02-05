@@ -60,7 +60,7 @@ Login.propTypes = {
   closeLoginModal: PropTypes.func.isRequired,
 };
 
-const styles = (theme) => {
+const styles = () => {
   return {
     textField: {
       width: 250,

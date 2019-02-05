@@ -1,9 +1,8 @@
 import React from "react";
-import PropTypes from "prop-types";
 import compose from "lodash.compose";
 import { withStyles } from "@material-ui/core/styles";
 
-function Workouts(props) {
+function Workouts() {
   return <div>workouts</div>;
 }
 

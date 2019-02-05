@@ -9,7 +9,6 @@ function Workout() {
   const removeExercise = (id) => {
     setExercises((state) => state.filter((exercise) => id !== exercise.id));
   };
-  console.log("exercises ", exercises);
   return (
     <div>
       <Exercises exercises={exercises} removeExercise={removeExercise} />

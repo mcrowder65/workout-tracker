@@ -1,9 +1,8 @@
 import React from "react";
-import PropTypes from "prop-types";
 import compose from "lodash.compose";
 import { withStyles } from "@material-ui/core/styles";
 
-function Home(props) {
+function Home() {
   return <div>home</div>;
 }
 
