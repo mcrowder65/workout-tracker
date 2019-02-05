@@ -11,7 +11,8 @@ export const theme = createMuiTheme({
   },
   modal: {
     display: "flex",
-    justifyContent: "center",
+    flexDirection: "column",
+    marginTop: "5%",
     alignItems: "center",
   },
 });
