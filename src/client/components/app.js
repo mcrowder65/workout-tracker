@@ -55,6 +55,7 @@ const styles = () => {
       bottom: 0,
     },
     body: {
+      backgroundColor: "rgba(0, 0, 0, 0.03)",
       height: "100%",
       width: "100%",
     },

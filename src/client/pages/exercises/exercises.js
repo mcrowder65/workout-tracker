@@ -2,25 +2,56 @@ import React from "react";
 import PropTypes from "prop-types";
 import compose from "lodash.compose";
 import { withStyles } from "@material-ui/core/styles";
-import { Fab } from "@material-ui/core";
-import AddIcon from "@material-ui/icons/Add";
+import { Card } from "@material-ui/core";
+import Fab from "../../reusable/fab";
+import AddExercise from "./add-exercise";
+import useState from "use-local-storage-set-state";
+import Exercise from "./exercise";
 
 function Exercises({ classes }) {
+  const [isAddExerciseModalOpen, setAddExerciseModalOpen] = useState(
+    false,
+    "add-exercise-modal",
+  );
+  const [exercises, setExercises] = useState([], "exercises");
+  const removeExercise = (id) => {
+    setExercises((state) => state.filter((exercise) => id !== exercise.id));
+  };
+  const addExercise = (exercise) => {
+    setExercises((state) => [...state, exercise]);
+  };
   return (
     <div>
-      Exercises
-      <Fab color="primary" aria-label="Add" className={classes.fab}>
-        <AddIcon />
-      </Fab>
+      {exercises.map(({ goalReps, weight, title, id }, index) => {
+        return (
+          <Card key={index} className={classes.card}>
+            <Exercise
+              goalReps={goalReps}
+              weight={weight}
+              title={title}
+              id={id}
+              removeExercise={removeExercise}
+            />
+          </Card>
+        );
+      })}
+      <AddExercise
+        isAddExerciseModalOpen={isAddExerciseModalOpen}
+        setAddExerciseModalOpen={setAddExerciseModalOpen}
+        addExercise={addExercise}
+      />
+      <Fab onClick={() => setAddExerciseModalOpen(true)} />
     </div>
   );
 }
 
 Exercises.propTypes = { classes: PropTypes.object.isRequired };
 
-const styles = (theme) => {
+const styles = () => {
   return {
-    fab: theme.fab,
+    card: {
+      margin: 20,
+    },
   };
 };
 
