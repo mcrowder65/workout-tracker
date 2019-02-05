@@ -53,7 +53,11 @@ export default enhance(SnackbarProvider);
 
 export const withSnackbar = (YourComponent) => {
   function ComponentToConnect(props) {
-    const { addMessage, removeMessage } = React.useContext(Context);
+    // TODO fix this
+    const { addMessage, removeMessage } = React.useContext(Context) || {
+      addMessage: () => {},
+      removeMessage: () => {},
+    };
     return (
       <YourComponent
         {...props}

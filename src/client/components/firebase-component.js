@@ -58,7 +58,7 @@ class FirebaseComponent extends React.Component {
           signup: this.signup,
         }}
       >
-        {children({ currentUser })}
+        {typeof children === "function" ? children({ currentUser }) : children}
       </FirebaseContext.Provider>
     );
   }

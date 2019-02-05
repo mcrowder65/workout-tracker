@@ -32,6 +32,7 @@ const enhance = compose(withStyles(styles));
 export default enhance(BottomNavigationSelectorProvider);
 
 export function useBottomNavigationSelector() {
-  const { bottomTab, setBottomTab } = React.useContext(BnsContext);
+  // TODO this is not working
+  const { bottomTab, setBottomTab } = React.useContext(BnsContext) || {};
   return [bottomTab, setBottomTab];
 }
