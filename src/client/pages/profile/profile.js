@@ -1,10 +1,18 @@
 import React from "react";
-import PropTypes from "prop-types";
 import compose from "lodash.compose";
 import { withStyles } from "@material-ui/core/styles";
+import { Button } from "@material-ui/core";
+import { useFirebaseFunctions } from "../../components/firebase-component";
 
-function Profile(props) {
-  return <div>profile</div>;
+function Profile() {
+  const { logout } = useFirebaseFunctions();
+  return (
+    <div>
+      <Button color="primary" variant="contained" onClick={logout}>
+        Sign out
+      </Button>
+    </div>
+  );
 }
 
 Profile.propTypes = {};

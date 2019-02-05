@@ -54,23 +54,21 @@ AddExercise.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-const styles = {
-  modal: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  modalCard: {
-    width: "400px",
-    height: "400px",
-  },
-  formContent: {
-    height: "100%",
-    display: "flex",
-    justifyContent: "space-around",
-    alignItems: "center",
-    flexDirection: "column",
-  },
+const styles = (theme) => {
+  return {
+    modal: theme.modal,
+    modalCard: {
+      width: "400px",
+      height: "400px",
+    },
+    formContent: {
+      height: "100%",
+      display: "flex",
+      justifyContent: "space-around",
+      alignItems: "center",
+      flexDirection: "column",
+    },
+  };
 };
 
 const enhance = compose(withStyles(styles));

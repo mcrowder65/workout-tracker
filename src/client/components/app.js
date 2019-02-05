@@ -2,22 +2,40 @@ import React from "react";
 import compose from "lodash.compose";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
+import { CircularProgress } from "@material-ui/core";
 
 import BottomNavigation from "./bottom-navigation";
 import Providers from "./providers";
 import { bottomNavigationRoutes } from "../navigation";
+import LandingPage from "../pages/landing-page";
 
 function App({ classes }) {
   return (
     <Providers>
-      {({ bottomTab }) => {
+      {({ bottomTab, currentUser }) => {
         const Route = bottomNavigationRoutes[bottomTab].component;
+        let Screen;
+        if (currentUser === false) {
+          Screen = () => (
+            <div className={classes.centered}>
+              <CircularProgress color="primary" />
+            </div>
+          );
+        } else if (currentUser === null) {
+          Screen = () => <LandingPage />;
+        } else if (currentUser) {
+          Screen = () => (
+            <>
+              <div className={classes.centered}>{<Route />}</div>
+              <div className={classes.footer}>
+                <BottomNavigation />
+              </div>
+            </>
+          );
+        }
         return (
           <div className={classes.body}>
-            <div className={classes.centered}>{<Route />}</div>
-            <div className={classes.footer}>
-              <BottomNavigation />
-            </div>
+            <Screen />
           </div>
         );
       }}

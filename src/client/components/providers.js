@@ -2,23 +2,10 @@ import React from "react";
 import PropTypes from "prop-types";
 import compose from "lodash.compose";
 import BottomNavigationSelectorProvider from "./bottom-navigation-selector";
-import {
-  createMuiTheme,
-  MuiThemeProvider,
-  withStyles,
-} from "@material-ui/core/styles";
+import { theme } from "../theme";
+import { MuiThemeProvider, withStyles } from "@material-ui/core/styles";
 import firebase from "@firebase/app";
-
-const theme = createMuiTheme({
-  typography: {
-    useNextVariants: true,
-  },
-  fab: {
-    position: "absolute",
-    bottom: 70,
-    right: 10,
-  },
-});
+import FirebaseComponent from "./firebase-component";
 
 const config = {
   apiKey: "AIzaSyBnAdhESRtR59Ds8AjOVBaZvVx63f3P9lI",
@@ -32,13 +19,19 @@ firebase.initializeApp(config);
 function Providers({ children }) {
   return (
     <MuiThemeProvider theme={theme}>
-      <BottomNavigationSelectorProvider>
-        {({ bottomTab, setBottomTab }) => {
-          return typeof children === "function"
-            ? children({ bottomTab, setBottomTab })
-            : children;
+      <FirebaseComponent>
+        {({ currentUser }) => {
+          return (
+            <BottomNavigationSelectorProvider>
+              {({ bottomTab, setBottomTab }) => {
+                return typeof children === "function"
+                  ? children({ bottomTab, setBottomTab, currentUser })
+                  : children;
+              }}
+            </BottomNavigationSelectorProvider>
+          );
         }}
-      </BottomNavigationSelectorProvider>
+      </FirebaseComponent>
     </MuiThemeProvider>
   );
 }
