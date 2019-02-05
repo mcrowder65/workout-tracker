@@ -4,14 +4,8 @@ import compose from "lodash.compose";
 import { withStyles } from "@material-ui/core/styles";
 import { useFirebaseFunctions } from "../components/firebase-component";
 import useState from "use-local-storage-set-state";
-import {
-  Grid,
-  TextField,
-  Modal,
-  Button,
-  Card,
-  Typography,
-} from "@material-ui/core";
+import Modal from "../reusable/modal";
+import { Grid, TextField, Typography } from "@material-ui/core";
 
 function Login({ classes, isLoginModalOpen, closeLoginModal }) {
   const [email, setEmail] = useState("", "login-email");
@@ -22,71 +16,40 @@ function Login({ classes, isLoginModalOpen, closeLoginModal }) {
     await login(email, password);
   };
   return (
-    <Modal open={isLoginModalOpen} className={classes.modal}>
-      <Card>
-        <Grid container justify="center" alignItems="center">
-          <form onSubmit={onSubmit}>
-            <Grid
-              container
-              direction="column"
-              justify="center"
-              alignItems="center"
-            >
-              <Grid item>
-                <Typography variant="h6">Login</Typography>
-              </Grid>
-              <Grid item container justify="center" alignItems="center">
-                <Grid item>
-                  <TextField
-                    className={classes.textField}
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    label="Email"
-                    required
-                    variant="outlined"
-                    margin="normal"
-                  />
-                </Grid>
-                <Grid item>
-                  <TextField
-                    type="password"
-                    className={classes.textField}
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    label="Password"
-                    required
-                    variant="outlined"
-                    margin="normal"
-                  />
-                </Grid>
-              </Grid>
-              <Grid
-                item
-                container
-                direction="row"
-                justify="space-around"
-                className={classes.buttons}
-              >
-                <Grid item>
-                  <Button
-                    variant="contained"
-                    color="secondary"
-                    onClick={closeLoginModal}
-                  >
-                    Cancel
-                  </Button>
-                </Grid>
-                <Grid item>
-                  <Button type="submit" variant="contained" color="primary">
-                    Login
-                  </Button>
-                </Grid>
-              </Grid>
-            </Grid>
-          </form>
+    <Modal
+      onSubmit={onSubmit}
+      open={isLoginModalOpen}
+      onCancelClick={closeLoginModal}
+    >
+      <Grid item>
+        <Typography variant="h6">Login</Typography>
+      </Grid>
+      <Grid item container justify="center" alignItems="center">
+        <Grid item>
+          <TextField
+            className={classes.textField}
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            label="Email"
+            required
+            variant="outlined"
+            margin="normal"
+          />
         </Grid>
-      </Card>
+        <Grid item>
+          <TextField
+            type="password"
+            className={classes.textField}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            label="Password"
+            required
+            variant="outlined"
+            margin="normal"
+          />
+        </Grid>
+      </Grid>
     </Modal>
   );
 }
@@ -99,11 +62,6 @@ Login.propTypes = {
 
 const styles = (theme) => {
   return {
-    modal: theme.modal,
-    buttons: {
-      width: "80%",
-      margin: 10,
-    },
     textField: {
       width: 250,
     },
