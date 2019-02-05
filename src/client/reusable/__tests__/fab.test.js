@@ -1,4 +1,3 @@
-
 import React from "react";
 import Fab from "../fab";
 import { cleanup } from "react-testing-library";
