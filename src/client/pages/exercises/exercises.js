@@ -21,7 +21,12 @@ function Exercises({ classes }) {
     setExercises((state) => [...state, exercise]);
   };
   return (
-    <div>
+    <div className={classes.content}>
+      <AddExercise
+        isAddExerciseModalOpen={isAddExerciseModalOpen}
+        setAddExerciseModalOpen={setAddExerciseModalOpen}
+        addExercise={addExercise}
+      />
       {exercises.map(({ goalReps, weight, title, id }, index) => {
         return (
           <Card key={index} className={classes.card}>
@@ -35,11 +40,6 @@ function Exercises({ classes }) {
           </Card>
         );
       })}
-      <AddExercise
-        isAddExerciseModalOpen={isAddExerciseModalOpen}
-        setAddExerciseModalOpen={setAddExerciseModalOpen}
-        addExercise={addExercise}
-      />
       <Fab onClick={() => setAddExerciseModalOpen(true)} />
     </div>
   );
@@ -51,6 +51,9 @@ const styles = () => {
   return {
     card: {
       margin: 20,
+    },
+    content: {
+      height: "100%",
     },
   };
 };

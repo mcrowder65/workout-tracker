@@ -4,7 +4,7 @@ import { Button, Typography, Grid } from "@material-ui/core";
 import compose from "lodash.compose";
 import { withStyles } from "@material-ui/core/styles";
 
-function Exercise({ title, weight, goalReps, removeExercise, id, classes }) {
+function Exercise({ title, removeExercise, id, classes }) {
   return (
     <Grid
       className={classes.grid}
@@ -16,12 +16,6 @@ function Exercise({ title, weight, goalReps, removeExercise, id, classes }) {
       <Grid item>
         <div>
           <Typography>Title: {title}</Typography>
-        </div>
-        <div>
-          <Typography>weight: {weight}</Typography>
-        </div>
-        <div>
-          <Typography>reps: {goalReps}</Typography>
         </div>
       </Grid>
       <Grid item>
@@ -38,8 +32,6 @@ function Exercise({ title, weight, goalReps, removeExercise, id, classes }) {
 }
 
 Exercise.propTypes = {
-  goalReps: PropTypes.string.isRequired,
-  weight: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   removeExercise: PropTypes.func.isRequired,
   id: PropTypes.string.isRequired,

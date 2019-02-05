@@ -15,7 +15,7 @@ function Modal({
 }) {
   return (
     <MuiModal className={classes.modal} open={open}>
-      <Card>
+      <Card className={classes.card}>
         <form onSubmit={onSubmit}>
           <Grid
             container
@@ -67,7 +67,13 @@ Modal.defaultProps = {
   cancelText: "cancel",
   submitText: "submit",
 };
-const styles = (theme) => ({ modal: theme.modal, buttons: { margin: 10 } });
+const styles = (theme) => ({
+  modal: theme.modal,
+  buttons: { margin: 10 },
+  card: {
+    width: "100%",
+  },
+});
 
 const enhance = compose(withStyles(styles));
 export default enhance(Modal);
