@@ -3,20 +3,19 @@ import PropTypes from "prop-types";
 import compose from "lodash.compose";
 import { withStyles } from "@material-ui/core/styles";
 import { Grid, Typography, Button } from "@material-ui/core";
-import useState from "use-local-storage-set-state";
 import Signup from "./signup";
 import Login from "./login";
+import useState from "use-local-storage-set-state";
 
 function LandingPage({ classes }) {
   const [isSignUpModalOpen, setSignUpModalOpen] = useState(
     false,
-    "isSignUpModalOpen",
+    "isSignupModalOpen",
   );
   const [isLoginModalOpen, setLoginModalOpen] = useState(
     false,
     "isLoginModalOpen",
   );
-
   return (
     <Grid
       className={classes.content}

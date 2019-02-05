@@ -1,32 +1,46 @@
 import React from "react";
 import PropTypes from "prop-types";
 import * as firebaseService from "../services/firebase-service";
+import compose from "lodash.compose";
+import { withSnackbar } from "./snackbar-provider";
 
 const FirebaseContext = React.createContext();
 
 class FirebaseComponent extends React.Component {
   static propTypes = {
     children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
+    addMessage: PropTypes.func.isRequired,
   };
   state = {
     currentUser: false,
   };
-
   refreshUser = async () => {
     const currentUser = await firebaseService.getUserFromFirebase();
     this.setState({ currentUser });
   };
   logout = async () => {
-    await firebaseService.logout();
-    await this.refreshUser();
+    try {
+      await firebaseService.logout();
+      await this.refreshUser();
+    } catch (e) {
+      this.props.addMessage(e.message);
+    }
   };
   signup = async (email, password) => {
-    await firebaseService.signup(email, password);
-    await this.refreshUser();
+    try {
+      await firebaseService.signup(email, password);
+      await this.refreshUser();
+    } catch (e) {
+      this.props.addMessage(e.message);
+    }
   };
   login = async (email, password) => {
-    await firebaseService.login(email, password);
-    await this.refreshUser();
+    try {
+      await firebaseService.login(email, password);
+      await this.refreshUser();
+    } catch (e) {
+      this.props.addMessage(e.message);
+    }
   };
   async componentDidMount() {
     await this.refreshUser();
@@ -57,4 +71,5 @@ export function useFirebaseFunctions() {
 
   return { currentUser, refreshUser, logout, signup, login };
 }
-export default FirebaseComponent;
+const enhance = compose(withSnackbar);
+export default enhance(FirebaseComponent);

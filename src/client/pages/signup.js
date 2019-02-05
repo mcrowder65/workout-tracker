@@ -11,17 +11,15 @@ import {
   Typography,
 } from "@material-ui/core";
 import useState from "use-local-storage-set-state";
-import { signup } from "../services/firebase-service";
 import { useFirebaseFunctions } from "../components/firebase-component";
 
 const Signup = ({ isSignUpModalOpen, closeSignUpModal, classes }) => {
   const [email, setEmail] = useState("", "signup-email");
   const [password, setPassword] = React.useState("");
-  const { refreshUser } = useFirebaseFunctions();
+  const { signup } = useFirebaseFunctions();
   const onSubmit = async (e) => {
     e.preventDefault();
     await signup(email, password);
-    await refreshUser();
   };
   return (
     <Modal open={isSignUpModalOpen} className={classes.modal}>

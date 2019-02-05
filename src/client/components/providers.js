@@ -6,6 +6,7 @@ import { theme } from "../theme";
 import { MuiThemeProvider, withStyles } from "@material-ui/core/styles";
 import firebase from "@firebase/app";
 import FirebaseComponent from "./firebase-component";
+import SnackbarProvider from "./snackbar-provider";
 
 const config = {
   apiKey: "AIzaSyBnAdhESRtR59Ds8AjOVBaZvVx63f3P9lI",
@@ -19,19 +20,21 @@ firebase.initializeApp(config);
 function Providers({ children }) {
   return (
     <MuiThemeProvider theme={theme}>
-      <FirebaseComponent>
-        {({ currentUser }) => {
-          return (
-            <BottomNavigationSelectorProvider>
-              {({ bottomTab, setBottomTab }) => {
-                return typeof children === "function"
-                  ? children({ bottomTab, setBottomTab, currentUser })
-                  : children;
-              }}
-            </BottomNavigationSelectorProvider>
-          );
-        }}
-      </FirebaseComponent>
+      <SnackbarProvider>
+        <FirebaseComponent>
+          {({ currentUser }) => {
+            return (
+              <BottomNavigationSelectorProvider>
+                {({ bottomTab, setBottomTab }) => {
+                  return typeof children === "function"
+                    ? children({ bottomTab, setBottomTab, currentUser })
+                    : children;
+                }}
+              </BottomNavigationSelectorProvider>
+            );
+          }}
+        </FirebaseComponent>
+      </SnackbarProvider>
     </MuiThemeProvider>
   );
 }
