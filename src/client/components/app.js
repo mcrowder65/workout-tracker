@@ -50,14 +50,14 @@ App.propTypes = {
 const styles = () => {
   return {
     footer: {
-      position: "absolute",
+      position: "fixed",
       width: "100%",
       bottom: 0,
     },
     body: {
       backgroundColor: "rgba(0, 0, 0, 0.03)",
-      height: "100%",
-      width: "100%",
+      height: "100vh",
+      width: "100vw",
     },
     centered: {
       height: "100%",

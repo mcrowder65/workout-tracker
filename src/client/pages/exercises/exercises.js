@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import compose from "lodash.compose";
 import { withStyles } from "@material-ui/core/styles";
-import { Card } from "@material-ui/core";
 import Fab from "../../reusable/fab";
 import AddExercise from "./add-exercise";
 import useState from "use-local-storage-set-state";
@@ -29,7 +28,7 @@ function Exercises({ classes }) {
       />
       {exercises.map(({ goalReps, weight, title, id }, index) => {
         return (
-          <Card key={index} className={classes.card}>
+          <div className={classes.exercise} key={id}>
             <Exercise
               goalReps={goalReps}
               weight={weight}
@@ -37,7 +36,7 @@ function Exercises({ classes }) {
               id={id}
               removeExercise={removeExercise}
             />
-          </Card>
+          </div>
         );
       })}
       <Fab onClick={() => setAddExerciseModalOpen(true)} />
@@ -49,7 +48,7 @@ Exercises.propTypes = { classes: PropTypes.object.isRequired };
 
 const styles = () => {
   return {
-    card: {
+    exercise: {
       margin: 20,
     },
     content: {

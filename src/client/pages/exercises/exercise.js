@@ -1,33 +1,62 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Button, Typography, Grid } from "@material-ui/core";
+import { Button, Typography, Grid, Card } from "@material-ui/core";
 import compose from "lodash.compose";
 import { withStyles } from "@material-ui/core/styles";
 
-function Exercise({ title, removeExercise, id, classes }) {
+function Exercise({ title, removeExercise, id, classes, editExercise }) {
   return (
-    <Grid
-      className={classes.grid}
-      container
-      direction="row"
-      justify="space-between"
-      alignItems="center"
-    >
-      <Grid item>
-        <div>
-          <Typography>Title: {title}</Typography>
-        </div>
-      </Grid>
-      <Grid item>
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={() => removeExercise(id)}
+    <Card className={classes.card}>
+      <Grid
+        className={classes.content}
+        container
+        direction="column"
+        justify="space-around"
+        alignItems="center"
+      >
+        <Grid item>
+          <div>
+            <Typography
+              variant="h6"
+              style={{ fontSize: "5vw" }}
+              noWrap
+              paragraph
+              inline
+            >
+              {title}
+            </Typography>
+          </div>
+        </Grid>
+        <Grid
+          item
+          container
+          className={classes.buttons}
+          direction="row"
+          justify="space-around"
         >
-          Delete
-        </Button>
+          <Grid item>
+            <Button
+              size="small"
+              variant="contained"
+              color="secondary"
+              onClick={() => editExercise(id)}
+            >
+              Edit
+            </Button>
+          </Grid>
+          <Grid item>
+            <Button
+              size="small"
+              variant="contained"
+              color="primary"
+              onClick={() => removeExercise(id)}
+            >
+              Delete
+            </Button>
+          </Grid>
+        </Grid>
       </Grid>
-    </Grid>
+    </Card>
   );
 }
 
@@ -36,11 +65,21 @@ Exercise.propTypes = {
   removeExercise: PropTypes.func.isRequired,
   id: PropTypes.string.isRequired,
   classes: PropTypes.object.isRequired,
+  editExercise: PropTypes.func.isRequired,
 };
 
 const styles = {
-  grid: {
+  card: {
     padding: 5,
+    width: 180,
+    height: 100,
+  },
+  content: {
+    height: "100%",
+    width: "100%",
+  },
+  buttons: {
+    width: "100%",
   },
 };
 

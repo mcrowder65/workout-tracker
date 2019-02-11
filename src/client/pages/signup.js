@@ -6,52 +6,59 @@ import Modal from "../reusable/modal";
 import { Grid, TextField, Typography } from "@material-ui/core";
 import useState from "use-local-storage-set-state";
 import { useFirebaseFunctions } from "../components/firebase-component";
+import { Snackbar } from "../components/snackbar-provider";
 
 const Signup = ({ isSignUpModalOpen, closeSignUpModal, classes }) => {
-  const [email, setEmail] = useState("", "signup-email");
-  const [password, setPassword] = React.useState("");
-  const { signup } = useFirebaseFunctions();
-  const onSubmit = async (e) => {
-    e.preventDefault();
-    await signup(email, password);
-  };
   return (
-    <Modal
-      open={isSignUpModalOpen}
-      className={classes.modal}
-      onSubmit={onSubmit}
-      onCancelClick={closeSignUpModal}
-    >
-      <Grid item>
-        <Typography variant="h6">Signup</Typography>
-      </Grid>
-      <Grid item container justify="center" alignItems="center">
-        <Grid item>
-          <TextField
-            className={classes.textField}
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            label="Email"
-            required
-            variant="outlined"
-            margin="normal"
-          />
-        </Grid>
-        <Grid item>
-          <TextField
-            type="password"
-            className={classes.textField}
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            label="Password"
-            required
-            variant="outlined"
-            margin="normal"
-          />
-        </Grid>
-      </Grid>
-    </Modal>
+    <Snackbar>
+      {({ addMessage }) => {
+        const [email, setEmail] = useState("", "signup-email");
+        const [password, setPassword] = React.useState("");
+        const { signup } = useFirebaseFunctions();
+        const onSubmit = async (e) => {
+          e.preventDefault();
+          await signup(email, password, addMessage);
+        };
+        return (
+          <Modal
+            open={isSignUpModalOpen}
+            className={classes.modal}
+            onSubmit={onSubmit}
+            onCancelClick={closeSignUpModal}
+          >
+            <Grid item>
+              <Typography variant="h6">Signup</Typography>
+            </Grid>
+            <Grid item container justify="center" alignItems="center">
+              <Grid item>
+                <TextField
+                  className={classes.textField}
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  label="Email"
+                  required
+                  variant="outlined"
+                  margin="normal"
+                />
+              </Grid>
+              <Grid item>
+                <TextField
+                  type="password"
+                  className={classes.textField}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  label="Password"
+                  required
+                  variant="outlined"
+                  margin="normal"
+                />
+              </Grid>
+            </Grid>
+          </Modal>
+        );
+      }}
+    </Snackbar>
   );
 };
 

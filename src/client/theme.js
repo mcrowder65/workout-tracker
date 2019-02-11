@@ -5,7 +5,7 @@ export const theme = createMuiTheme({
     useNextVariants: true,
   },
   fab: {
-    position: "absolute",
+    position: "fixed",
     bottom: 70,
     right: 10,
   },

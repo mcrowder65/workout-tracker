@@ -12,7 +12,7 @@ function LandingPage({ classes }) {
     false,
     "isSignupModalOpen",
   );
-  const [isLoginModalOpen, setLoginModalOpen] = useState(
+  const [isLoginModalOpen, setLoginModalOpen] = React.useState(
     false,
     "isLoginModalOpen",
   );

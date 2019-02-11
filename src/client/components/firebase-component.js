@@ -2,68 +2,63 @@ import React from "react";
 import PropTypes from "prop-types";
 import * as firebaseService from "../services/firebase-service";
 import compose from "lodash.compose";
-import { withSnackbar } from "./snackbar-provider";
+import { Snackbar, withSnackbar } from "./snackbar-provider";
 
 const FirebaseContext = React.createContext();
 
-class FirebaseComponent extends React.Component {
-  static propTypes = {
-    children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
-    addMessage: PropTypes.func.isRequired,
+function FirebaseComponent({ children }) {
+  const [currentUser, setUser] = React.useState(false);
+  const refreshUser = async () => {
+    const u = await firebaseService.getUserFromFirebase();
+    setUser(u);
   };
-  state = {
-    currentUser: false,
-  };
-  refreshUser = async () => {
-    const currentUser = await firebaseService.getUserFromFirebase();
-    this.setState({ currentUser });
-  };
-  logout = async () => {
+  const logout = async (addMessage) => {
     try {
       await firebaseService.logout();
-      await this.refreshUser();
+      await refreshUser();
     } catch (e) {
-      this.props.addMessage(e.message);
+      addMessage(e.message);
     }
   };
-  signup = async (email, password) => {
+  const signup = async (email, password, addMessage) => {
     try {
       await firebaseService.signup(email, password);
-      await this.refreshUser();
+      await refreshUser();
     } catch (e) {
-      this.props.addMessage(e.message);
+      addMessage(e.message);
     }
   };
-  login = async (email, password) => {
+  const login = async (email, password, addMessage) => {
     try {
       await firebaseService.login(email, password);
-      await this.refreshUser();
+      await refreshUser();
     } catch (e) {
-      this.props.addMessage(e.message);
+      addMessage(e.message);
     }
   };
-  async componentDidMount() {
-    await this.refreshUser();
-  }
-  render() {
-    const { children } = this.props;
-    const { currentUser } = this.state;
-    return (
-      <FirebaseContext.Provider
-        value={{
-          currentUser,
-          refreshUser: this.refreshUser,
-          logout: this.logout,
-          login: this.login,
-          signup: this.signup,
-        }}
-      >
-        {typeof children === "function" ? children({ currentUser }) : children}
-      </FirebaseContext.Provider>
-    );
-  }
+  React.useEffect(() => {
+    if (currentUser === false) {
+      refreshUser();
+    }
+  });
+  return (
+    <FirebaseContext.Provider
+      value={{
+        currentUser,
+        refreshUser,
+        logout,
+        login,
+        signup,
+      }}
+    >
+      {typeof children === "function" ? children({ currentUser }) : children}
+    </FirebaseContext.Provider>
+  );
 }
 
+FirebaseComponent.propTypes = {
+  children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
+};
 export function useFirebaseFunctions() {
   const { currentUser, refreshUser, logout, signup, login } = React.useContext(
     FirebaseContext,
