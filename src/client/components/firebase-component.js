@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import * as firebaseService from "../services/firebase-service";
 import compose from "lodash.compose";
-import { Snackbar, withSnackbar } from "./snackbar-provider";
+import { withSnackbar } from "./snackbar-provider";
 
 const FirebaseContext = React.createContext();
 

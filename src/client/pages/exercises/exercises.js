@@ -2,10 +2,12 @@ import React from "react";
 import PropTypes from "prop-types";
 import compose from "lodash.compose";
 import { withStyles } from "@material-ui/core/styles";
-import Fab from "../../reusable/fab";
+import { Grid } from "@material-ui/core";
+import SpeedDial from "../../reusable/speed-dial";
 import AddExercise from "./add-exercise";
 import useState from "use-local-storage-set-state";
 import Exercise from "./exercise";
+import FitnessCenter from "@material-ui/icons/FitnessCenter";
 
 function Exercises({ classes }) {
   const [isAddExerciseModalOpen, setAddExerciseModalOpen] = useState(
@@ -26,20 +28,37 @@ function Exercises({ classes }) {
         setAddExerciseModalOpen={setAddExerciseModalOpen}
         addExercise={addExercise}
       />
-      {exercises.map(({ goalReps, weight, title, id }, index) => {
-        return (
-          <div className={classes.exercise} key={id}>
-            <Exercise
-              goalReps={goalReps}
-              weight={weight}
-              title={title}
-              id={id}
-              removeExercise={removeExercise}
-            />
-          </div>
-        );
-      })}
-      <Fab onClick={() => setAddExerciseModalOpen(true)} />
+      <Grid
+        container
+        className={classes.exercises}
+        alignItems="center"
+        justify="center"
+      >
+        {exercises.map(({ goalReps, weight, title, id }) => {
+          return (
+            <Grid item key={id} className={classes.exercise}>
+              <Exercise
+                goalReps={goalReps}
+                weight={weight}
+                title={title}
+                id={id}
+                removeExercise={removeExercise}
+              />
+            </Grid>
+          );
+        })}
+      </Grid>
+      <SpeedDial
+        onClick={() => setAddExerciseModalOpen(true)}
+        actions={[
+          {
+            icon: <FitnessCenter />,
+            name: "Add Exercise",
+            onClick: () => setAddExerciseModalOpen(true),
+          },
+          { icon: <FitnessCenter />, name: "Add Body Part" },
+        ]}
+      />
     </div>
   );
 }
@@ -48,11 +67,18 @@ Exercises.propTypes = { classes: PropTypes.object.isRequired };
 
 const styles = () => {
   return {
+    exercises: {
+      marginBottom: 150,
+    },
     exercise: {
-      margin: 20,
+      margin: 5,
     },
     content: {
       height: "100%",
+      display: "flex",
+      justifyContent: "center",
+      flexDirection: "column",
+      alignItems: "center",
     },
   };
 };

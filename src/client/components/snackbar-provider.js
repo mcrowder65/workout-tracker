@@ -4,7 +4,6 @@ import compose from "lodash.compose";
 import { withStyles } from "@material-ui/core/styles";
 import { Snackbar as MuiSnackbar } from "@material-ui/core";
 import shortid from "shortid";
-import { Portal } from "react-portal";
 
 const Context = React.createContext();
 const AUTO_HIDE_DURATION_DEFAULT = 2000;
@@ -25,20 +24,18 @@ export function Snackbar({ children }) {
 
   return (
     <>
-      <Portal node={document && document.getElementById("snackbar")}>
-        {Object.values(messages).map(({ message, id, autoHideDuration }) => {
-          return (
-            <MuiSnackbar
-              anchorOrigin={{ vertical: "top", horizontal: "center" }}
-              open={true}
-              key={id}
-              onClose={() => removeMessage(id)}
-              message={message}
-              autoHideDuration={autoHideDuration}
-            />
-          );
-        })}
-      </Portal>
+      {Object.values(messages).map(({ message, id, autoHideDuration }) => {
+        return (
+          <MuiSnackbar
+            anchorOrigin={{ vertical: "top", horizontal: "center" }}
+            open={true}
+            key={id}
+            onClose={() => removeMessage(id)}
+            message={message}
+            autoHideDuration={autoHideDuration}
+          />
+        );
+      })}
       {children({ addMessage })}
     </>
   );

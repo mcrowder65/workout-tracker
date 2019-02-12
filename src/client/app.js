@@ -4,10 +4,10 @@ import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import { CircularProgress } from "@material-ui/core";
 
-import BottomNavigation from "./bottom-navigation";
-import Providers from "./providers";
-import { bottomNavigationRoutes } from "../navigation";
-import LandingPage from "../pages/landing-page";
+import BottomNavigation from "./components/bottom-navigation";
+import Providers from "./components/providers";
+import { bottomNavigationRoutes } from "./navigation";
+import LandingPage from "./pages/landing-page";
 
 function App({ classes }) {
   return (
@@ -22,11 +22,17 @@ function App({ classes }) {
             </div>
           );
         } else if (currentUser === null) {
-          Screen = () => <LandingPage />;
+          Screen = () => (
+            <div className={classes.centered}>
+              <LandingPage />
+            </div>
+          );
         } else if (currentUser) {
           Screen = () => (
             <>
-              <div className={classes.centered}>{<Route />}</div>
+              <div className={classes.routes}>
+                <Route />
+              </div>
               <div className={classes.footer}>
                 <BottomNavigation />
               </div>
@@ -54,8 +60,10 @@ const styles = () => {
       width: "100%",
       bottom: 0,
     },
+    routes: {
+      marginBottom: 50,
+    },
     body: {
-      backgroundColor: "rgba(0, 0, 0, 0.03)",
       height: "100vh",
       width: "100vw",
     },

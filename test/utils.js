@@ -14,3 +14,9 @@ export const render = (yourComponent) => {
     </FirebaseComponent>,
   );
 };
+
+export const sleep = (time) => {
+  return new Promise((resolve) => {
+    setTimeout(resolve, time);
+  });
+};

@@ -71,8 +71,8 @@ Exercise.propTypes = {
 const styles = {
   card: {
     padding: 5,
-    width: 180,
-    height: 100,
+    width: 150,
+    height: 80,
   },
   content: {
     height: "100%",

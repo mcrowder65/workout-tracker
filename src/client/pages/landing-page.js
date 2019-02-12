@@ -46,6 +46,7 @@ function LandingPage({ classes }) {
             <Button
               variant="contained"
               color="primary"
+              data-testid="open-login-modal"
               onClick={() => setLoginModalOpen(true)}
             >
               Login

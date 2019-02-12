@@ -30,7 +30,7 @@ function Login({ classes, isLoginModalOpen, closeLoginModal }) {
             open={isLoginModalOpen}
             onCancelClick={closeLoginModal}
           >
-            <Grid item>
+            <Grid item data-testid="login-modal">
               <Typography variant="h6">Login</Typography>
             </Grid>
             <Grid item container justify="center" alignItems="center">

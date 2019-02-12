@@ -33,6 +33,7 @@ function Modal({
             >
               <Grid item>
                 <Button
+                  data-testid="left-modal-button"
                   variant="contained"
                   color="secondary"
                   onClick={onCancelClick}

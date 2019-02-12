@@ -4,19 +4,17 @@ import compose from "lodash.compose";
 import { Fab as MuiFab } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import AddIcon from "@material-ui/icons/Add";
-import SpeedDial from "./speed-dial";
+
 function Fab({ onClick, classes, color, ariaLabel, children }) {
   return (
-    <div className={classes.fab}>
-      <SpeedDial
-        onClick={onClick}
-        color={color}
-        aria-label={ariaLabel}
-        className={classes.fab}
-      >
-        {children}
-      </SpeedDial>
-    </div>
+    <MuiFab
+      onClick={onClick}
+      color={color}
+      aria-label={ariaLabel}
+      className={classes.fab}
+    >
+      {children}
+    </MuiFab>
   );
 }
 
