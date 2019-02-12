@@ -21,6 +21,17 @@ function Exercises({ classes }) {
   const addExercise = (exercise) => {
     setExercises((state) => [...state, exercise]);
   };
+  const editExercise = (newExercise) => {
+    setExercises((state) =>
+      state.map((exercise) => {
+        if (exercise.id === newExercise.id) {
+          return newExercise;
+        }
+        return exercise;
+      }),
+    );
+  };
+
   return (
     <div className={classes.content}>
       <AddExercise
@@ -28,6 +39,7 @@ function Exercises({ classes }) {
         setAddExerciseModalOpen={setAddExerciseModalOpen}
         addExercise={addExercise}
       />
+
       <Grid
         container
         className={classes.exercises}
@@ -42,6 +54,7 @@ function Exercises({ classes }) {
                 weight={weight}
                 title={title}
                 id={id}
+                editExercise={editExercise}
                 removeExercise={removeExercise}
               />
             </Grid>
@@ -56,7 +69,6 @@ function Exercises({ classes }) {
             name: "Add Exercise",
             onClick: () => setAddExerciseModalOpen(true),
           },
-          { icon: <FitnessCenter />, name: "Add Body Part" },
         ]}
       />
     </div>

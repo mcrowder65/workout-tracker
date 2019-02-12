@@ -3,10 +3,23 @@ import PropTypes from "prop-types";
 import { Button, Typography, Grid, Card } from "@material-ui/core";
 import compose from "lodash.compose";
 import { withStyles } from "@material-ui/core/styles";
+import EditExercise from "./edit-exercise";
+import useState from "use-local-storage-set-state";
 
 function Exercise({ title, removeExercise, id, classes, editExercise }) {
+  const [isEditExerciseModalOpen, setEditExerciseModalOpen] = useState(
+    false,
+    "edit-exercise-modal",
+  );
   return (
     <Card className={classes.card}>
+      <EditExercise
+        isEditEditExerciseOpen={isEditExerciseModalOpen}
+        setEditExerciseModalOpen={setEditExerciseModalOpen}
+        editExercise={editExercise}
+        id={id}
+        title={title}
+      />
       <Grid
         className={classes.content}
         container
@@ -39,7 +52,7 @@ function Exercise({ title, removeExercise, id, classes, editExercise }) {
               size="small"
               variant="contained"
               color="secondary"
-              onClick={() => editExercise(id)}
+              onClick={() => setEditExerciseModalOpen(id)}
             >
               Edit
             </Button>
