@@ -19,13 +19,10 @@ export const subscribeToExercises = (onUpdate) => {
   return hitService((url) => subscribe(url, onUpdate));
 };
 
-export const removeExercise = async (id) => {
-  const { uid } = await getUserFromFirebase();
-  await deleteRecord(`exercises/${uid}/${id}`);
+export const removeExercise = (id) => {
+  return hitService((url) => deleteRecord(`${url}/${id}`));
 };
 
-export const setExercise = async ({ id, ...exercise }) => {
-  const { uid } = await getUserFromFirebase();
-
-  await updateTable(`exercises/${uid}/${id}`, exercise);
+export const setExercise = ({ id, ...exercise }) => {
+  return hitService((url) => updateTable(`${url}/${id}`, exercise));
 };
