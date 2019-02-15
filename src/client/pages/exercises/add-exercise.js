@@ -4,19 +4,18 @@ import { TextField, Grid, Typography } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import compose from "lodash.compose";
 import Modal from "../../reusable/modal";
+import * as exerciseModel from "../../models/exercise";
 
 function AddExercise({
-  addExercise,
   isAddExerciseModalOpen,
   setAddExerciseModalOpen,
   classes,
 }) {
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     setAddExerciseModalOpen(false);
     const { title } = e.target.elements;
-
-    addExercise({
+    await exerciseModel.addExercise({
       title: title.value,
     });
   };
@@ -44,7 +43,6 @@ function AddExercise({
 
 AddExercise.propTypes = {
   classes: PropTypes.object.isRequired,
-  addExercise: PropTypes.func.isRequired,
   setAddExerciseModalOpen: PropTypes.func.isRequired,
   isAddExerciseModalOpen: PropTypes.bool.isRequired,
 };

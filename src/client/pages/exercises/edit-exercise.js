@@ -4,9 +4,9 @@ import { TextField, Grid, Typography } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import compose from "lodash.compose";
 import Modal from "../../reusable/modal";
+import * as exerciseModel from "../../models/exercise";
 
 function EditExercise({
-  editExercise,
   isEditEditExerciseOpen,
   setEditExerciseModalOpen,
   classes,
@@ -14,10 +14,10 @@ function EditExercise({
   title,
 }) {
   const [localTitle, setTitle] = React.useState(title);
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     setEditExerciseModalOpen(false);
-    editExercise({ title: localTitle, id });
+    await exerciseModel.setExercise({ title: localTitle, id });
   };
   return (
     <Modal
@@ -44,7 +44,6 @@ function EditExercise({
 
 EditExercise.propTypes = {
   classes: PropTypes.object.isRequired,
-  editExercise: PropTypes.func.isRequired,
   setEditExerciseModalOpen: PropTypes.func.isRequired,
   isEditEditExerciseOpen: PropTypes.bool.isRequired,
   id: PropTypes.string.isRequired,

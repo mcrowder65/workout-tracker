@@ -16,15 +16,7 @@ function Exercises({ classes }) {
     "add-exercise-modal",
   );
   const [exercises, setExercises] = React.useState({});
-  const removeExercise = async (id) => {
-    await exerciseModel.removeExercise(id);
-  };
-  const addExercise = async (exercise) => {
-    await exerciseModel.addExercise(exercise);
-  };
-  const editExercise = async (newExercise) => {
-    await exerciseModel.setExercise(newExercise);
-  };
+
   React.useEffect(() => {
     exerciseModel.subscribeToExercises((snapshot) => {
       setExercises(snapshot.val() || {});
@@ -35,7 +27,6 @@ function Exercises({ classes }) {
       <AddExercise
         isAddExerciseModalOpen={isAddExerciseModalOpen}
         setAddExerciseModalOpen={setAddExerciseModalOpen}
-        addExercise={addExercise}
       />
 
       <Grid
@@ -47,12 +38,7 @@ function Exercises({ classes }) {
         {Object.entries(exercises).map(([id, { title }]) => {
           return (
             <Grid item key={id} className={classes.exercise}>
-              <Exercise
-                id={id}
-                editExercise={editExercise}
-                removeExercise={removeExercise}
-                title={title}
-              />
+              <Exercise id={id} title={title} />
             </Grid>
           );
         })}

@@ -24,6 +24,7 @@ function WorkoutModal({
           <TextField
             className={classes.textField}
             value={title}
+            variant="outlined"
             onChange={setField}
             name="title"
             label="Workout Title"

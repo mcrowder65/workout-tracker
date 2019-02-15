@@ -5,12 +5,16 @@ import compose from "lodash.compose";
 import { withStyles } from "@material-ui/core/styles";
 import EditExercise from "./edit-exercise";
 import useState from "use-local-storage-set-state";
+import * as exerciseModel from "../../models/exercise";
 
-function Exercise({ title, removeExercise, id, classes, editExercise }) {
+function Exercise({ title, id, classes, editExercise }) {
   const [isEditExerciseModalOpen, setEditExerciseModalOpen] = useState(
     false,
     "edit-exercise-modal",
   );
+  const removeExercise = async () => {
+    await exerciseModel.removeExercise(id);
+  };
   return (
     <Card className={classes.card}>
       <EditExercise
@@ -75,7 +79,6 @@ function Exercise({ title, removeExercise, id, classes, editExercise }) {
 
 Exercise.propTypes = {
   title: PropTypes.string.isRequired,
-  removeExercise: PropTypes.func.isRequired,
   id: PropTypes.string.isRequired,
   classes: PropTypes.object.isRequired,
   editExercise: PropTypes.func.isRequired,
