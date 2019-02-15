@@ -53,6 +53,7 @@ function Exercise({ title, removeExercise, id, classes, editExercise }) {
               variant="contained"
               color="secondary"
               onClick={() => setEditExerciseModalOpen(id)}
+              onClick={() => setEditExerciseModalOpen(true)}
             >
               Edit
             </Button>
@@ -81,6 +82,9 @@ Exercise.propTypes = {
   editExercise: PropTypes.func.isRequired,
 };
 
+Exercise.defaultProps = {
+  editExercise: () => ({}),
+};
 const styles = {
   card: {
     padding: 5,

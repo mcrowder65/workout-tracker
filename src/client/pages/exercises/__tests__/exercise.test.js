@@ -1,5 +1,6 @@
 import React from "react";
-import { render, cleanup } from "react-testing-library";
+import { cleanup } from "react-testing-library";
+import { render } from "client/../../test/utils";
 
 import Exercise from "../exercise";
 

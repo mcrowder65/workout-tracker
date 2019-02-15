@@ -8,30 +8,28 @@ import AddExercise from "./add-exercise";
 import useState from "use-local-storage-set-state";
 import Exercise from "./exercise";
 import FitnessCenter from "@material-ui/icons/FitnessCenter";
+import * as exerciseModel from "../../models/exercise";
 
 function Exercises({ classes }) {
   const [isAddExerciseModalOpen, setAddExerciseModalOpen] = useState(
     false,
     "add-exercise-modal",
   );
-  const [exercises, setExercises] = useState([], "exercises");
-  const removeExercise = (id) => {
-    setExercises((state) => state.filter((exercise) => id !== exercise.id));
+  const [exercises, setExercises] = React.useState([]);
+  const removeExercise = async (id) => {
+    await exerciseModel.removeExercise(id);
   };
-  const addExercise = (exercise) => {
-    setExercises((state) => [...state, exercise]);
+  const addExercise = async (exercise) => {
+    await exerciseModel.addExercise(exercise);
   };
-  const editExercise = (newExercise) => {
-    setExercises((state) =>
-      state.map((exercise) => {
-        if (exercise.id === newExercise.id) {
-          return newExercise;
-        }
-        return exercise;
-      }),
-    );
+  const editExercise = async (newExercise) => {
+    await exerciseModel.setExercise(newExercise);
   };
-
+  React.useEffect(() => {
+    exerciseModel.subscribeToExercises((snapshot) => {
+      setExercises(snapshot.val() || {});
+    });
+  }, {});
   return (
     <div className={classes.content}>
       <AddExercise
@@ -46,16 +44,14 @@ function Exercises({ classes }) {
         alignItems="center"
         justify="center"
       >
-        {exercises.map(({ goalReps, weight, title, id }) => {
+        {Object.entries(exercises).map(([id, { title }]) => {
           return (
             <Grid item key={id} className={classes.exercise}>
               <Exercise
-                goalReps={goalReps}
-                weight={weight}
-                title={title}
                 id={id}
                 editExercise={editExercise}
                 removeExercise={removeExercise}
+                title={title}
               />
             </Grid>
           );

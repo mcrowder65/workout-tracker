@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { TextField, Grid, Typography } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import compose from "lodash.compose";
-import shortid from "shortid";
 import Modal from "../../reusable/modal";
 
 function AddExercise({
@@ -19,7 +18,6 @@ function AddExercise({
 
     addExercise({
       title: title.value,
-      id: shortid.generate(),
     });
   };
   return (
