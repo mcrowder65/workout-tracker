@@ -4,7 +4,6 @@ import compose from "lodash.compose";
 import { withStyles } from "@material-ui/core/styles";
 import WorkoutModal from "./workout-modal";
 import { updateWorkout } from "../../models/workout";
-import useState from "use-local-storage-set-state";
 
 function EditWorkout({ setOpen, open, id, title }) {
   const onSubmit = async (e) => {
@@ -18,15 +17,13 @@ function EditWorkout({ setOpen, open, id, title }) {
     setOpen(false);
   };
 
-  const [fields, setFields] = useState({ title }, "edit-workout-modal-fields");
+  const [fields, setFields] = React.useState(
+    { title },
+    "edit-workout-modal-fields",
+  );
 
   const setField = (e) => {
-    setFields((state) => {
-      return {
-        ...state,
-        [e.target.name]: e.target.value,
-      };
-    });
+    setFields({ ...fields, [e.target.name]: e.target.value });
   };
   return (
     <WorkoutModal
