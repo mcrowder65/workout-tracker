@@ -15,7 +15,7 @@ function Exercises({ classes }) {
     false,
     "add-exercise-modal",
   );
-  const [exercises, setExercises] = React.useState([]);
+  const [exercises, setExercises] = React.useState({});
   const removeExercise = async (id) => {
     await exerciseModel.removeExercise(id);
   };

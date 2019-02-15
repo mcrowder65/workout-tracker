@@ -1,28 +1,18 @@
-import {
-  addToTable,
-  deleteRecord,
-  getUserFromFirebase,
-  subscribe,
-  updateTable,
-} from "../services/firebase-service";
+import { add, subscribe, remove, update } from "./models";
 
-const hitService = async (func) => {
-  const { uid } = await getUserFromFirebase();
-  const url = `exercises/${uid}`;
-  return func(url);
-};
+const root = "exercises";
 export const addExercise = (exercise) => {
-  return hitService((url) => addToTable(url, exercise));
+  return add(root, exercise);
 };
 
 export const subscribeToExercises = (onUpdate) => {
-  return hitService((url) => subscribe(url, onUpdate));
+  return subscribe(root, onUpdate);
 };
 
 export const removeExercise = (id) => {
-  return hitService((url) => deleteRecord(`${url}/${id}`));
+  return remove(root, id);
 };
 
 export const setExercise = ({ id, ...exercise }) => {
-  return hitService((url) => updateTable(`${url}/${id}`, exercise));
+  return update(root, { id, ...exercise });
 };

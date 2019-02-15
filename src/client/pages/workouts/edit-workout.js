@@ -3,25 +3,22 @@ import PropTypes from "prop-types";
 import compose from "lodash.compose";
 import { withStyles } from "@material-ui/core/styles";
 import WorkoutModal from "./workout-modal";
+import { updateWorkout } from "../../models/workout";
 import useState from "use-local-storage-set-state";
-import { addWorkout } from "../../models/workout";
 
-function AddWorkout({ setOpen, open }) {
+function EditWorkout({ setOpen, open, id, title }) {
   const onSubmit = async (e) => {
     e.preventDefault();
     setOpen(false);
-    const { title } = e.target.elements;
-    await addWorkout({ title: title.value });
+    const { title: eTitle } = e.target.elements;
+    await updateWorkout({ id, title: eTitle.value });
   };
 
   const onCancelClick = () => {
     setOpen(false);
   };
 
-  const [fields, setFields] = useState(
-    { title: "" },
-    "add-workout-modal-fields",
-  );
+  const [fields, setFields] = useState({ title }, "edit-workout-modal-fields");
 
   const setField = (e) => {
     setFields((state) => {
@@ -38,17 +35,19 @@ function AddWorkout({ setOpen, open }) {
       open={open}
       title={fields.title}
       setField={setField}
-      modalTitle="Add Workout"
+      modalTitle="Edit Workout"
     />
   );
 }
 
-AddWorkout.propTypes = {
+EditWorkout.propTypes = {
   setOpen: PropTypes.func.isRequired,
   open: PropTypes.bool.isRequired,
+  id: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
 };
 
 const styles = {};
 
 const enhance = compose(withStyles(styles));
-export default enhance(AddWorkout);
+export default enhance(EditWorkout);
