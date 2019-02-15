@@ -52,7 +52,6 @@ function Exercise({ title, removeExercise, id, classes, editExercise }) {
               size="small"
               variant="contained"
               color="secondary"
-              onClick={() => setEditExerciseModalOpen(id)}
               onClick={() => setEditExerciseModalOpen(true)}
             >
               Edit
