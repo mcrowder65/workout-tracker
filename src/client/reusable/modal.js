@@ -69,10 +69,11 @@ Modal.defaultProps = {
   submitText: "submit",
 };
 const styles = (theme) => ({
-  modal: theme.modal,
+  modal: { ...theme.modal, height: "100%" },
   buttons: { margin: 10 },
   card: {
     width: "100%",
+    height: 400,
   },
 });
 

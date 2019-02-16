@@ -3,7 +3,9 @@ import PropTypes from "prop-types";
 import compose from "lodash.compose";
 import { withStyles } from "@material-ui/core/styles";
 import Modal from "../../reusable/modal";
-import { Grid, Typography, TextField } from "@material-ui/core";
+import { Grid, Typography, TextField, Button } from "@material-ui/core";
+import useState from "use-local-storage-set-state";
+import AddExercise from "./add-exercise";
 
 function WorkoutModal({
   classes,
@@ -14,12 +16,31 @@ function WorkoutModal({
   title,
   modalTitle,
 }) {
+  const [isExerciseModalOpen, setExerciseModalStatus] = useState(
+    false,
+    "exercise-workout-modal",
+  );
+  const addExercise = (e) => {
+    e.preventDefault();
+    setExerciseModalStatus(false);
+  };
   return (
     <Modal onSubmit={onSubmit} open={open} onCancelClick={onCancelClick}>
+      <AddExercise
+        open={isExerciseModalOpen}
+        onCancelClick={() => setExerciseModalStatus(false)}
+        onSubmit={addExercise}
+      />
       <Grid item>
         <Typography variant="h6">{modalTitle}</Typography>
       </Grid>
-      <Grid item container justify="center" alignItems="center">
+      <Grid
+        item
+        container
+        justify="center"
+        alignItems="center"
+        direction="column"
+      >
         <Grid item>
           <TextField
             className={classes.textField}
@@ -29,6 +50,16 @@ function WorkoutModal({
             name="title"
             label="Workout Title"
           />
+        </Grid>
+        <Grid item>
+          <Button
+            variant="contained"
+            color="secondary"
+            size="small"
+            onClick={() => setExerciseModalStatus(true)}
+          >
+            Add Exercise
+          </Button>
         </Grid>
       </Grid>
     </Modal>
