@@ -52,12 +52,12 @@ export const setTable = (tableName, body) => {
   });
 };
 
-export const updateTable = (tableName, body) => {
+export const updateTable = (tableName, body, includeLastUpdated = true) => {
   return hitFirebase(tableName, {
     method: "PATCH",
     body: JSON.stringify({
       ...body,
-      lastEdited: new Date(),
+      ...(includeLastUpdated ? { lastEdited: new Date() } : {}),
     }),
   });
 };
