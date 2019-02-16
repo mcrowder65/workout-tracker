@@ -33,7 +33,7 @@ function Workouts({ classes }) {
           );
         })}
       </Grid>
-      <AddWorkout setOpen={setOpen} open={open} />
+      {open && <AddWorkout setOpen={setOpen} open={open} />}
       <Fab onClick={() => setOpen(true)} />
     </div>
   );

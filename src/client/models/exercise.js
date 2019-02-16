@@ -15,13 +15,13 @@ export const addExercise = async (exercise) => {
 export const subscribeToExercises = async (onUpdate) => {
   const { uid } = await getUserFromFirebase();
 
-  const remindersRef = firebase
+  const exercisesRef = firebase
     .database()
     .ref()
     .child("exercises")
     .orderByChild("uid")
     .equalTo(uid);
-  remindersRef.on("value", onUpdate);
+  exercisesRef.on("value", onUpdate);
 };
 
 export const removeExercise = (id) => {

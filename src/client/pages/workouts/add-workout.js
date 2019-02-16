@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import compose from "lodash.compose";
 import { withStyles } from "@material-ui/core/styles";
 import WorkoutModal from "./workout-modal";
-import useState from "use-local-storage-set-state";
 import { addWorkout } from "../../models/workout";
 
 function AddWorkout({ setOpen, open }) {
@@ -18,18 +17,9 @@ function AddWorkout({ setOpen, open }) {
     setOpen(false);
   };
 
-  const [fields, setFields] = useState(
-    { title: "" },
-    "add-workout-modal-fields",
-  );
-
+  const [fields, setFields] = React.useState({ title: "" });
   const setField = (e) => {
-    setFields((state) => {
-      return {
-        ...state,
-        [e.target.name]: e.target.value,
-      };
-    });
+    setFields({ ...fields, [e.target.name]: e.target.value });
   };
   return (
     <WorkoutModal
